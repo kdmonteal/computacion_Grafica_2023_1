@@ -21,7 +21,7 @@ function initScene() {
 function makeScene() {
     // 1ER. Create a Scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000);
+    scene.background = new THREE.Color(0x1955b5);
     // 2DO. Create a 3D camera
     camera = new THREE.PerspectiveCamera( 75,  // FOV (Campo de vision)
                                         window.innerWidth / window.innerHeight, // aspect (tamaño de la pantalla)
@@ -37,7 +37,9 @@ function makeScene() {
 
     // To Make Controls on Screen
     controls = new THREE.OrbitControls(camera,renderer.domElement);
-    camera.position.z = 10;
+    camera.position.x = 0;
+    camera.position.y = 10;
+    camera.position.z = 0;
     controls.update();
 }
 function draw3dShape() {
@@ -96,12 +98,14 @@ function onWindowResize(){
     camera.updateProjectionMatrix();
 
     renderer.setSize( window.innerWidth, window.innerHeight );
-
 }
 function renderScreen() {
 	requestAnimationFrame(renderScreen);
     controls.update();
+
 	renderer.render(scene, camera);
+
+
 
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
