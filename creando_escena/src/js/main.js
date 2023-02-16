@@ -14,14 +14,14 @@ var cube      = null,
 function initScene() {
     makeScene();
     createGrid(100,100);
-    draw3dShape();
+    //draw3dShape();
     renderScreen();
     window.addEventListener( 'resize', onWindowResize, false );
 }
 function makeScene() {
     // 1ER. Create a Scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x1955b5);
+    scene.background = new THREE.Color(0xFFF8F1);
     // 2DO. Create a 3D camera
     camera = new THREE.PerspectiveCamera( 75,  // FOV (Campo de vision)
                                         window.innerWidth / window.innerHeight, // aspect (tamaño de la pantalla)
@@ -42,48 +42,36 @@ function makeScene() {
     camera.position.z = 0;
     controls.update();
 }
-function draw3dShape() {
+function draw3dShape(object) {
      
-    // Create the first Object - Cube
-    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00,
-                                                    wireframe: true  } );
-    cube = new THREE.Mesh( geometry, material );
-    scene.add( cube );
+    switch (object) {
+        case 'Torus':
+            // Create the three Object - Torus
+            const geometryTorus = new THREE.TorusKnotGeometry( 1, 0.1, 5,3 );
+            const materialTorus = new THREE.MeshBasicMaterial( { color: 0xF55268 } );
+            torusKnot = new THREE.Mesh( geometryTorus, materialTorus );
+            scene.add( torusKnot );
+            torusKnot.position.x = 7;
+          break;
+        case 'Box':
+            // Create the first Object - Cube
+            const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+            const material = new THREE.MeshBasicMaterial( { color: 0x00ff00,
+                                                            wireframe: false  } );
+            cube = new THREE.Mesh( geometry, material );
+            scene.add( cube );
+          break;
+        case 'Sphere':
+            // Create the three Object - Sphere
+            const geometryShere = new THREE.SphereGeometry( 1, 10, 5 );
+            const materialShere = new THREE.MeshBasicMaterial( { color: 0x7971F5,
+                                                                wireframe: false } );
+            sphere = new THREE.Mesh( geometryShere, materialShere );
+            scene.add( sphere );
+            sphere.position.x = -7;
 
-    // Create the second Object - Cone
-    const geometryCone = new THREE.ConeGeometry( 1, 3, 10 );
-    const materialCone = new THREE.MeshBasicMaterial( {color: 0xffff00,
-                                                        wireframe: true } );
-    cone = new THREE.Mesh( geometryCone, materialCone );
-    scene.add( cone );
-
-    // Create the three Object - Cylinder
-    const geometryCylinder = new THREE.CylinderGeometry( 1, 1, 3, 5 );
-    const materialCylinder = new THREE.MeshBasicMaterial( {color: 0xf0f0f0,
-                                                           wireframe: true } );
-    cylinder = new THREE.Mesh( geometryCylinder, materialCylinder );
-    scene.add( cylinder );
-
-    // Create the three Object - Sphere
-    const geometryShere = new THREE.SphereGeometry( 1, 10, 5 );
-    const materialShere = new THREE.MeshBasicMaterial( { color: 0x7971F5,
-                                                        wireframe: true } );
-    sphere = new THREE.Mesh( geometryShere, materialShere );
-    scene.add( sphere );
-
-
-    // Create the three Object - Torus
-    const geometryTorus = new THREE.TorusKnotGeometry( 1, 0.1, 5,3 );
-    const materialTorus = new THREE.MeshBasicMaterial( { color: 0xF55268 } );
-    torusKnot = new THREE.Mesh( geometryTorus, materialTorus );
-    scene.add( torusKnot );
-
-    cone.position.x = -3;
-    cylinder.position.x = 3;
-
-    sphere.position.x = -7;
-    torusKnot.position.x = 7;
+          break;
+      }
 }
 function createGrid(data1_size,data2_division) {
     const size = data1_size;
@@ -105,9 +93,7 @@ function renderScreen() {
 
 	renderer.render(scene, camera);
 
-
-
-    cube.rotation.x += 0.01;
+    /*cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
 
     cone.rotation.x -= 0.01;
@@ -120,5 +106,5 @@ function renderScreen() {
     sphere.rotation.y += 0.01;
 
     torusKnot.rotation.x += 0.01;
-    torusKnot.rotation.y += 0.01;
+    torusKnot.rotation.y += 0.01;*/
 }
