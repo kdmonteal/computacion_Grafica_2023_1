@@ -65,7 +65,11 @@ function draw3dShape(object) {
           break;
         case 'Sphere':
             // Create the three Object - Sphere
-            const geometryShere = new THREE.SphereGeometry( 1, 10, 5 );
+            const geometryShere = new THREE.SphereGeometry( 
+                                                            document.getElementById("sphere_radius").value,
+                                                            document.getElementById("sphere_width").value,
+                                                            document.getElementById("sphere_heigh").value 
+                                                        );
             const materialShere = new THREE.MeshBasicMaterial( { color: 0x7971F5,
                                                                 wireframe: false } );
             sphere = new THREE.Mesh( geometryShere, materialShere );
