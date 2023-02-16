@@ -43,7 +43,6 @@ function makeScene() {
     controls.update();
 }
 function draw3dShape(object) {
-     
     switch (object) {
         case 'Torus':
             // Create the three Object - Torus
@@ -55,7 +54,10 @@ function draw3dShape(object) {
           break;
         case 'Box':
             // Create the first Object - Cube
-            const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+            const geometry = new THREE.BoxGeometry(
+                                                    document.getElementById("box_width").value,
+                                                    document.getElementById("box_height").value,
+                                                    document.getElementById("box_depth").value );
             const material = new THREE.MeshBasicMaterial( { color: 0x00ff00,
                                                             wireframe: false  } );
             cube = new THREE.Mesh( geometry, material );
