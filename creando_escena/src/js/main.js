@@ -16,6 +16,7 @@ function initScene() {
     createGrid(100,100);
     draw3dShape();
     renderScreen();
+    window.addEventListener( 'resize', onWindowResize, false );
 }
 function makeScene() {
     // 1ER. Create a Scene
@@ -88,6 +89,14 @@ function createGrid(data1_size,data2_division) {
 
     const gridHelper = new THREE.GridHelper( size, divisions );
     scene.add( gridHelper );
+}
+function onWindowResize(){
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
 }
 function renderScreen() {
 	requestAnimationFrame(renderScreen);

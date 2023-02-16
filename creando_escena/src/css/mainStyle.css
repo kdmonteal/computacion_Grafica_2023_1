@@ -10,6 +10,7 @@ body{
 .vertical-menu {
     position: absolute;
     width: 200px; /* Set a width if you like */
+    height: 100%;
   }
   
   .vertical-menu a {
