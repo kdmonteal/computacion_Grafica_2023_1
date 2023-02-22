@@ -24,6 +24,9 @@ function initScene() {
     //draw3dShape();
     renderScreen();
     window.addEventListener( 'resize', onWindowResize, false ); // resize 
+
+
+    alert("El valor del selector es: "+document.getElementById("animar_cube").checked);
 }
 function makeScene() {
     // 1ER. Create a Scene
