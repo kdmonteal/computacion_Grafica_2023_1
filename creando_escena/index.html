@@ -1,56 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Geometry 3D</title>
-    <link rel="icon" type="image/png" href="./src/img/favicon_web.PNG">
-    <link rel="stylesheet" href="./src/css/mainStyle.css">
-
-    <script src="./src/libreries/three.js"></script>
-    <script src="./src/libreries/OrbitControls.js"></script>
-    <script src="./src/js/main.js"></script>
+    <title>Computación Gráfica 2023</title>
+    <link rel="stylesheet" href="./src/css/menu.css">
 </head>
-<body onload="initScene()">
-    <canvas width="800" height="600" class="webgl"></canvas>
 
-    <div class="vertical-menu"> 
-        <a href="#" class="active" >Torus</a>
-        <div id="opciones" style="padding: 4%; background-color: beige;">
-            <span>Radius:</span>
-            <input type="number" value="1">
-            <span>Tube:</span>
-            <input type="number" value="0.4">
-            <span>Radial Segments:</span>
-            <input type="number" value="12">
-            <span>Tubular Segments:</span>
-            <input type="number" value="48">
-            <button onclick="draw3dShape('Torus')">Create Torus</button>
+<body>
+
+    <h2>Responsive Column Cards</h2>
+    <p>Resize the browser window to see the effect.</p>
+
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <h3> <a href="./src/views/create_objects.html" target="">Create Objects</a> </h3>
+            </div>
         </div>
-        <a href="#" class="active">Sphere</a>
-        <div id="opciones" style="padding: 4%; background-color: beige;">
-            <span>Radius:</span>
-            <input id="sphere_radius" type="number" value="1">
-            <span>Width Segments:</span>
-            <input id="sphere_width" type="number" value="32">
-            <span>HeightSegments:</span>
-            <input id="sphere_heigh" type="number" value="16">
-            <button onclick="draw3dShape('Sphere')">Create Sphere</button>
+
+        <div class="column">
+            <div class="card">
+                <h3><a href="#" onClick="alert('under constructions..');" target="">Create Vectors</a></h3>
+            </div>
         </div>
-        <a href="#" class="active">Box</a>
-        <div id="opciones" style="padding: 4%; background-color: beige;">
-            <span>Width:</span>
-            <input id="box_width" type="number" value="1">
-            <span>Height:</span>
-            <input id="box_height" type="number" value="1">
-            <span>Depth:</span>
-            <input id="box_depth" type="number" value="1">
-            <button onclick="draw3dShape('Box')">Create Box</button><br><br>
-            <label>
-                <input onchange="makeAnimationsObject()" type="checkbox" id="animar_cube" name="animar_cube" value="animar"> Animar Objeto
-            </label>
+
+        <div class="column">
+            <div class="card">
+                <h3><a href="#" onClick="alert('under constructions..');" target="">Transformation</a></h3>
+            </div>
         </div>
-      </div>
+    </div>
 </body>
 </html>

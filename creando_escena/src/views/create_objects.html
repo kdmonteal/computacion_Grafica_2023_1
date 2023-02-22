@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Geometry 3D</title>
+    <link rel="icon" type="image/png" href="../img/favicon_web.PNG">
+    <link rel="stylesheet" href="../css/mainStyle.css">
+
+    <script src="../libreries/three.js"></script>
+    <script src="../libreries/OrbitControls.js"></script>
+    <script src="../js/main.js"></script>
+</head>
+<body onload="initScene()">
+    <canvas width="800" height="600" class="webgl"></canvas>
+
+    <div class="vertical-menu"> 
+        <a href="#" class="active" >Torus</a>
+        <div id="opciones" style="padding: 4%; background-color: beige;">
+            <span>Radius:</span>
+            <input type="number" value="1">
+            <span>Tube:</span>
+            <input type="number" value="0.4">
+            <span>Radial Segments:</span>
+            <input type="number" value="12">
+            <span>Tubular Segments:</span>
+            <input type="number" value="48">
+            <button onclick="draw3dShape('Torus')">Create Torus</button>
+        </div>
+        <a href="#" class="active">Sphere</a>
+        <div id="opciones" style="padding: 4%; background-color: beige;">
+            <span>Radius:</span>
+            <input id="sphere_radius" type="number" value="1">
+            <span>Width Segments:</span>
+            <input id="sphere_width" type="number" value="32">
+            <span>HeightSegments:</span>
+            <input id="sphere_heigh" type="number" value="16">
+            <button onclick="draw3dShape('Sphere')">Create Sphere</button>
+        </div>
+        <a href="#" class="active">Box</a>
+        <div id="opciones" style="padding: 4%; background-color: beige;">
+            <span>Width:</span>
+            <input id="box_width" type="number" value="1">
+            <span>Height:</span>
+            <input id="box_height" type="number" value="1">
+            <span>Depth:</span>
+            <input id="box_depth" type="number" value="1">
+            <button onclick="draw3dShape('Box')">Create Box</button><br><br>
+            <label>
+                <input onchange="makeAnimationsObject()" type="checkbox" id="animar_cube" name="animar_cube" value="animar"> Animar Objeto
+            </label>
+        </div>
+      </div>
+</body>
+</html>
