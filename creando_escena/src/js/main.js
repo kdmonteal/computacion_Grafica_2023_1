@@ -1,9 +1,16 @@
-var scene    = null,
-    camera   = null,
-    myCanvas = null,
-    renderer = null,
-    controls = null;
+/*
+    Author(a): Kelly Daniella Marin Montealegre
+    Date of creation: 15 de Febrero 2023
+    Last modification: 15 de Febrero 2023 13:46
+*/
 
+var scene    = null,   // Is the place where webgl draw all elements in the screen 
+    camera   = null,   // Is the element to allow see
+    myCanvas = null,   // Is the Canvas ("lienzo")
+    renderer = null,   // Is the process to represent the content
+    controls = null;   // Is the controller that user have to move the mouse in the screen (Zoom in, z. Out, movement, drag)
+
+// The elements create in the canvas
 var cube      = null,
     cone      = null,
     cylinder  = null,
@@ -16,7 +23,7 @@ function initScene() {
     createGrid(100,100);
     //draw3dShape();
     renderScreen();
-    window.addEventListener( 'resize', onWindowResize, false );
+    window.addEventListener( 'resize', onWindowResize, false ); // resize 
 }
 function makeScene() {
     // 1ER. Create a Scene
