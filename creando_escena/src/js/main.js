@@ -15,7 +15,8 @@ var cube      = null,
     cone      = null,
     cylinder  = null,
     sphere    = null,
-    torusKnot = null;
+    torusKnot = null,
+    animateCube = false;
 
 
 function initScene() {
@@ -24,9 +25,6 @@ function initScene() {
     //draw3dShape();
     renderScreen();
     window.addEventListener( 'resize', onWindowResize, false ); // resize 
-
-
-    alert("El valor del selector es: "+document.getElementById("animar_cube").checked);
 }
 function makeScene() {
     // 1ER. Create a Scene
@@ -69,7 +67,7 @@ function draw3dShape(object) {
                                                     document.getElementById("box_height").value,
                                                     document.getElementById("box_depth").value );
             const material = new THREE.MeshBasicMaterial( { color: 0x00ff00,
-                                                            wireframe: false  } );
+                                                            wireframe: true  } );
             cube = new THREE.Mesh( geometry, material );
             scene.add( cube );
           break;
@@ -103,15 +101,20 @@ function onWindowResize(){
 
     renderer.setSize( window.innerWidth, window.innerHeight );
 }
+function makeAnimationsObject() {
+    animateCube = document.getElementById("animar_cube").checked;
+}
 function renderScreen() {
 	requestAnimationFrame(renderScreen);
     controls.update();
 
 	renderer.render(scene, camera);
 
-    /*cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-
+    if(animateCube!=false){
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+    }
+    /*
     cone.rotation.x -= 0.01;
     cone.rotation.y -= 0.01;
 
