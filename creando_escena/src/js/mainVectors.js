@@ -12,7 +12,7 @@ var scene    = null,   // Is the place where webgl draw all elements in the scre
 
 function initScene() {
     makeScene();
-    createGrid(100,100);
+    createGrid(10,10);
     renderScreen();
     window.addEventListener( 'resize', onWindowResize, false ); // resize 
 }
