@@ -1,7 +1,7 @@
 /*
     Author(a): Kelly Daniella Marin Montealegre
     Date of creation: 23 de Febrero 2023
-    Last modification: 23 de Febrero 2023 14:11
+    Last modification: 1 de Marzo 2023 14:53
 */
 
 var scene    = null,   // Is the place where webgl draw all elements in the screen 
@@ -15,7 +15,6 @@ function initScene() {
     createGrid(10,10);
     renderScreen();
     window.addEventListener( 'resize', onWindowResize, false ); // resize 
-    vectors();
 }
 function makeScene() {
     // 1ER. Create a Scene
@@ -42,9 +41,20 @@ function makeScene() {
     controls.update();
 }
 
-function vectors() {
-    const a = new THREE.Vector3( 1, 2, 2);
-    const b = new THREE.Vector3( 0, 0, 0);
+function vectors(typeOrigin) {
+    var a = null;
+    var b = null;
+    if(typeOrigin==0){
+        a = new THREE.Vector3(document.getElementById("vectorEX").value, document.getElementById("vectorEY").value , document.getElementById("vectorEZ").value);
+        b = new THREE.Vector3( 0, 0, 0);
+    }else{
+        // @change a value
+        a = null;
+        b = null;
+
+        alert("under construction");
+    }
+    
     const d = a.distanceTo( b );
     
     const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
@@ -59,7 +69,7 @@ function vectors() {
     let g = new THREE.ConeGeometry( 0.1, 0.5);
         g.translate(0, d*1, 0); // base to 0
         g.rotateX(Math.PI * 0.5); // align along Z-axis
-    let m = new THREE.MeshBasicMaterial({ color: 0xff00ff }); // or any other material
+    let m = new THREE.MeshBasicMaterial({ color: 0x0000ff }); // or any other material
     let o = new THREE.Mesh(g, m);
         o.position.copy(b);
         o.lookAt(a);
