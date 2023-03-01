@@ -43,11 +43,10 @@ function makeScene() {
 }
 
 function vectors() {
-    const a = new THREE.Vector3( 5, 5, 0 );
-    //no arguments; will be initialised to (0, 0, 0)
-    const b = new THREE.Vector3( );
+    const a = new THREE.Vector3( 1, 2, 2);
+    const b = new THREE.Vector3( 0, 0, 0);
     const d = a.distanceTo( b );
-
+    
     const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
     const points = [];
             points.push( a );
@@ -57,17 +56,14 @@ function vectors() {
     const line = new THREE.Line( geometry, material );
     scene.add( line );
 
-    // v1  - base center, v2 - cone's pinnacle
-    let h = b.distanceTo(a);
     let g = new THREE.ConeGeometry( 0.1, 0.5);
-    g.translate(0, h*0.5, 0); // base to 0
-
-    g.rotateX(Math.PI * 0.5); // align along Z-axis
+        g.translate(0, d*1, 0); // base to 0
+        g.rotateX(Math.PI * 0.5); // align along Z-axis
     let m = new THREE.MeshBasicMaterial({ color: 0xff00ff }); // or any other material
     let o = new THREE.Mesh(g, m);
-    //o.position.copy(b);
-    o.lookAt(a);
-    scene.add(o);
+        o.position.copy(b);
+        o.lookAt(a);
+        scene.add(o);
 
     // Origin Point
     const geometryO = new THREE.SphereGeometry( 0.03, 16, 16 );
