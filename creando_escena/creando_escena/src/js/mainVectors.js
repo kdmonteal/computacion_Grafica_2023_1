@@ -15,6 +15,7 @@ function initScene() {
     createGrid(10,10);
     renderScreen();
     window.addEventListener( 'resize', onWindowResize, false ); // resize 
+    vectors();
 }
 function makeScene() {
     // 1ER. Create a Scene
@@ -39,6 +40,50 @@ function makeScene() {
     camera.position.y = 10;
     camera.position.z = 0;
     controls.update();
+}
+
+function vectors() {
+    const a = new THREE.Vector3( 5, 5, 0 );
+    //no arguments; will be initialised to (0, 0, 0)
+    const b = new THREE.Vector3( );
+    const d = a.distanceTo( b );
+
+    const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+    const points = [];
+            points.push( a );
+            points.push( b );
+
+    const geometry = new THREE.BufferGeometry().setFromPoints( points );
+    const line = new THREE.Line( geometry, material );
+    scene.add( line );
+
+    // v1  - base center, v2 - cone's pinnacle
+    let h = b.distanceTo(a);
+    let g = new THREE.ConeGeometry( 0.1, 0.5);
+    g.translate(0, h*0.5, 0); // base to 0
+
+    g.rotateX(Math.PI * 0.5); // align along Z-axis
+    let m = new THREE.MeshBasicMaterial({ color: 0xff00ff }); // or any other material
+    let o = new THREE.Mesh(g, m);
+    //o.position.copy(b);
+    o.lookAt(a);
+    scene.add(o);
+
+    // Origin Point
+    const geometryO = new THREE.SphereGeometry( 0.03, 16, 16 );
+    const materialO = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+    const sphere = new THREE.Mesh( geometryO, materialO );
+    scene.add( sphere );
+
+    // Final Point
+    const geometryF = new THREE.SphereGeometry( 0.03, 16, 16 );
+    const materialF = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const sphereF = new THREE.Mesh( geometryF, materialF );
+
+    sphereF.position.x = a.x;
+    sphereF.position.y = a.y;
+    sphereF.position.z = a.z;
+    scene.add( sphereF );
 }
 function createGrid(data1_size,data2_division) {
     const size = data1_size;
