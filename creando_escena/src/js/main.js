@@ -58,7 +58,9 @@ function draw3dShape(object) {
             const materialTorus = new THREE.MeshBasicMaterial( { color: 0xF55268 } );
             torusKnot = new THREE.Mesh( geometryTorus, materialTorus );
             scene.add( torusKnot );
-            torusKnot.position.x = 7;
+            torusKnot.position.x = document.getElementById('torus_x').value;
+            torusKnot.position.y = document.getElementById('torus_y').value;
+            torusKnot.position.z = document.getElementById('torus_z').value;
           break;
         case 'Box':
             // Create the first Object - Cube

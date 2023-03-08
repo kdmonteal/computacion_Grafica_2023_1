@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THREE JS - Parcial</title>
+
+    <link rel="stylesheet" href="./src/css/main.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- three -->
+    <script type="text/javascript" src="./src/js/libs/three.js"></script>
+    <!-- orbit controls -->
+    <script type="text/javascript" src="./src/js/libs/OrbitControls.js"></script>
+    <!-- main -->
+    <script type="text/javascript" src="./src/js/main.js"></script>
+
+</head>
+
+<body onload="start()">
+    <canvas id="app"></canvas>
+    <div class="gui quadrado"> </div>
+    <div class="gui">
+        <figure class="swing" onclick="openForm()">
+            <img class="build" src="./src/img/build.png" alt="car">
+        </figure>
+    </div>
+    <footer class="footerStyle">
+        <div class="row">
+            <div class="column" style="text-align: right;">
+                <img class="logoUsb" src="./src/img/usb.jpg" alt="usb">
+            </div>
+            <!-- The form -->
+            <div class="form-popup" id="myForm">
+                <form action="/action_page.php" class="form-container">
+
+                    <label for="numberEdificios"><b>Numero de edificios</b></label>
+                    <input type="number" placeholder="1" name="numberEdificios" required>
+
+                    <label for="numberPisos"><b>Numero de pisos</b></label>
+                    <input type="number" placeholder="1" name="numberPisos" required>
+
+                    <label for="colorEdificio"><b>Color edificio:</b></label>
+                    <input type="color" placeholder="1" name="colorEdificio" required>
+
+                    <label for="tieneWireframe"><b>Wireframe:</b></label>
+                    <input type="text" placeholder="Si / No" name="tieneWireframe" required>
+
+                    <label for="tieneVentanas"><b>Ventanas:</b></label>
+                    <input type="text" placeholder="Si / No" name="tieneVentanas" required>
+
+                    <button type="submit" class="btn">Crear</button>
+                    <button type="button" class="btn cancel" onclick="closeForm()">Cerrar</button>
+                </form>
+            </div>
+            <div class="column" style="text-align: left;padding: 10px;width: 2%;">
+                <div class="vertical"></div>
+            </div>
+            <div class="column" style="text-align: left; padding: 10px;">
+                <p>Modified by: Kelly Daniella Marin Montealegre</p>
+                <p>Student code: 123456 </p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
