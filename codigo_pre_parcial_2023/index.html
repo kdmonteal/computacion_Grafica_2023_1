@@ -39,13 +39,13 @@
                 <form action="/action_page.php" class="form-container">
 
                     <label for="numberEdificios"><b>Numero de edificios</b></label>
-                    <input type="number" placeholder="1" name="numberEdificios" required>
+                    <input type="number" placeholder="1" id="numberEdificios"name="numberEdificios" required>
 
                     <label for="numberPisos"><b>Numero de pisos</b></label>
-                    <input type="number" placeholder="1" name="numberPisos" required>
+                    <input type="number" placeholder="1"  id="numberPisos" name="numberPisos" required>
 
                     <label for="colorEdificio"><b>Color edificio:</b></label>
-                    <input type="color" placeholder="1" name="colorEdificio" required>
+                    <input type="color" placeholder="1" id="colorEdificio" name="colorEdificio" required>
 
                     <label for="tieneWireframe"><b>Wireframe:</b></label>
                     <input type="text" placeholder="Si / No" name="tieneWireframe" required>
@@ -53,7 +53,7 @@
                     <label for="tieneVentanas"><b>Ventanas:</b></label>
                     <input type="text" placeholder="Si / No" name="tieneVentanas" required>
 
-                    <button type="submit" class="btn">Crear</button>
+                    <button type="submit" class="btn" onclick="createbuild()">Crear</button>
                     <button type="button" class="btn cancel" onclick="closeForm()">Cerrar</button>
                 </form>
             </div>

@@ -132,9 +132,42 @@ function onWindowResize() {
 }
 
 function openForm() {
+    
+    
     document.getElementById("myForm").style.display = "block";
+
 }
 
   function closeForm() {
+    
     document.getElementById("myForm").style.display = "none";
+  }
+
+  function createbuild(){
+    var numberEdificios = document.getElementById("numberEdificios").value;
+    var numberpisos = document.getElementById("numberPisos").value;
+    var colorEdificio= document.getElementById("colorEdificio").value;
+    alert(colorEdificio);
+
+    for (let i = 1; i <= numberEdificios; i++) {
+
+        for (let j = 0; j < numberpisos; j++){
+            /*alert("soy el edificio: "+i+" en el piso: "+j);*()*/
+
+            const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+            const material = new THREE.MeshBasicMaterial( {color: 0x00ff00, wireframe: true} );
+            const cube = new THREE.Mesh( geometry, material );
+            cube.position.y = j+0.5;
+            cube.position.x =i*2;
+
+            scene.add( cube );
+           
+
+
+
+        }
+       
+      }
+
+    
   }
