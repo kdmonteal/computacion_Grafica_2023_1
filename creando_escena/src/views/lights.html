@@ -14,7 +14,7 @@
     <script src="../libreries/three.js"></script>
     <script src="../libreries/OrbitControls.js"></script>
     <script src="../js/vectores.js"></script>
-    <script src="../js/mainVectors.js"></script>
+    <script src="../js/mainLights.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -32,27 +32,36 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-
-                <div class="row" style="width: 100%;">
-                  <div class="col-sm-4">
+            <div class="row" style="width: 100%;">
+                <div class="col-sm-3">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModalCenter">
-                        Light: <b>Direccional</b>
+                    <button type="button" class="btn btn-outline-light" data-toggle="modal"
+                        data-target="#" onclick="createLight()">
+                        <b>Ambient</b>
                     </button>
-                  </div>
-                  <div class="col-sm-4">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#modalbyVector">
-                        Light: <b>Puntual</b>
-                    </button>
-                  </div>
-                  <div class="col-sm-4">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#modalbyVector">
-                        Light: <b>Spotlight</b>
-                    </button>
-                  </div>
                 </div>
+                <div class="col-sm-3">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-light" data-toggle="modal"
+                        data-target="#exampleModalCenter">
+                        <b>Directional</b>
+                    </button>
+                </div>
+                <div class="col-sm-3">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-light" data-toggle="modal"
+                        data-target="#modalbyVector">
+                        <b>PointLight</b>
+                    </button>
+                </div>
+                <div class="col-sm-3">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-light" data-toggle="modal"
+                        data-target="#modalbyVector">
+                        <b>SpotLight</b>
+                    </button>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -93,15 +102,18 @@
                         <div class="row">
                             (
                             <div class="col-sm-3">
-                                <input value="0" class="form-control" type="number" name="puntoBX" id="puntoBX" onchange="calculateComponentVector('puntoAX',this,'resultx')">
+                                <input value="0" class="form-control" type="number" name="puntoBX" id="puntoBX"
+                                    onchange="calculateComponentVector('puntoAX',this,'resultx')">
                             </div>
                             ,
                             <div class="col-sm-3">
-                                <input value="0" class="form-control" type="number" name="puntoBY" id="puntoBY" onchange="calculateComponentVector('puntoAY',this,'resulty')">
+                                <input value="0" class="form-control" type="number" name="puntoBY" id="puntoBY"
+                                    onchange="calculateComponentVector('puntoAY',this,'resulty')">
                             </div>
                             ,
                             <div class="col-sm-3">
-                                <input value="0" class="form-control" type="number" name="puntoBZ" id="puntoBZ" onchange="calculateComponentVector('puntoAZ',this,'resultz')">
+                                <input value="0" class="form-control" type="number" name="puntoBZ" id="puntoBZ"
+                                    onchange="calculateComponentVector('puntoAZ',this,'resultz')">
                             </div>
                             )
                         </div>
@@ -131,7 +143,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="vectors(1)" data-dismiss="modal">Draw Vector</button>
+                    <button type="button" class="btn btn-primary" onclick="vectors(1)" data-dismiss="modal">Draw
+                        Vector</button>
                 </div>
             </div>
         </div>
@@ -139,8 +152,8 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="modalbyVector" tabindex="-1" role="dialog"
-        aria-labelledby="modalbyVectorTitle" aria-hidden="true">
+    <div class="modal fade" id="modalbyVector" tabindex="-1" role="dialog" aria-labelledby="modalbyVectorTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -155,18 +168,15 @@
                         <div class="row">
                             (
                             <div class="col-sm-3">
-                                <input value="0" class="form-control" type="number" name="vectorEX"
-                                    id="vectorEX">
+                                <input value="0" class="form-control" type="number" name="vectorEX" id="vectorEX">
                             </div>
                             ,
                             <div class="col-sm-3">
-                                <input value="0" class="form-control" type="number" name="vectorEY"
-                                    id="vectorEY">
+                                <input value="0" class="form-control" type="number" name="vectorEY" id="vectorEY">
                             </div>
                             ,
                             <div class="col-sm-3">
-                                <input value="0" class="form-control" type="number" name="vectorEZ"
-                                    id="vectorEZ">
+                                <input value="0" class="form-control" type="number" name="vectorEZ" id="vectorEZ">
                             </div>
                             )
                         </div>
@@ -174,7 +184,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="vectors(0)" data-dismiss="modal">Draw Vector</button>
+                    <button type="button" class="btn btn-primary" onclick="vectors(0)" data-dismiss="modal">Draw
+                        Vector</button>
                 </div>
             </div>
         </div>
