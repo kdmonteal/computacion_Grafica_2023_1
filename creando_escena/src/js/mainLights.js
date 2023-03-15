@@ -39,6 +39,20 @@ function makeScene() {
     camera.position.y = 10;
     camera.position.z = 0;
     controls.update();
+
+    // Objects
+    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    const cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+    cube.position.y = 0.5;
+
+    // Plane
+    const planeGeomery = new THREE.PlaneGeometry( 10, 10 );
+    const materialplane = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    const plane = new THREE.Mesh( planeGeomery, materialplane );
+    scene.add( plane );
+    plane.rotation.x = Math.PI / 2;
 }
 function createLight() {
     // Ambient Light
