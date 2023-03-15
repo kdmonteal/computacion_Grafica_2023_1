@@ -42,22 +42,45 @@ function makeScene() {
 
     // Objects
     const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    const material = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
     const cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
     cube.position.y = 0.5;
 
     // Plane
     const planeGeomery = new THREE.PlaneGeometry( 10, 10 );
-    const materialplane = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    const materialplane = new THREE.MeshStandardMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
     const plane = new THREE.Mesh( planeGeomery, materialplane );
     scene.add( plane );
     plane.rotation.x = Math.PI / 2;
 }
-function createLight() {
-    // Ambient Light
-    const light = new THREE.AmbientLight( 0x404040 ); // soft white light
-    scene.add( light );
+function createLight(typeLight) {
+
+    switch(typeLight) {
+    case 'AmbientLight':
+        // Ambient Light
+        const light = new THREE.AmbientLight( 0x404040 ); // soft white light
+        scene.add( light );
+        break;
+    case 'directionalLight':
+        // Direction Light
+        const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+        scene.add( directionalLight );
+
+        const helper = new THREE.DirectionalLightHelper( directionalLight );
+        scene.add( helper );
+        break;
+    case 'pointLight':
+        const pointLight = new THREE.PointLight( 0xfffff0, 1, 100 );
+        pointLight.position.set( 1, 1, 1 );
+        scene.add( pointLight );
+
+        const sphereSize = 1;
+        const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
+        scene.add( pointLightHelper );
+        break;
+        
+    }
 }
 function createGrid(data1_size,data2_division) {
     const size = data1_size;
