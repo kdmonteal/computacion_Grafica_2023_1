@@ -82,7 +82,9 @@ function makeScene() {
 
     // Objects Material Lambert
     const geometryLambert = new THREE.BoxGeometry( 1, 1, 1 );
-    const materialLambert = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    const materialLambert = new THREE.MeshLambertMaterial( {color: 0xffffff,
+                                                            emissive: 0xffff00,
+                                                            emissiveIntensity: 0.8} );
     const cubeLambert = new THREE.Mesh( geometryLambert, materialLambert );
     scene.add( cubeLambert );
     cubeLambert.position.y = 0.5;
