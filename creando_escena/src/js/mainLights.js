@@ -91,6 +91,30 @@ function makeScene() {
     cubeLambert.position.x = 2;
     cubeLambert.position.z = 2;
 
+    // Objects Material Depth
+    const geometryDepth = new THREE.BoxGeometry( 1, 1, 1 );
+    const materialDepth = new THREE.MeshDepthMaterial({transparent:false,
+                                                        opacity: 0.5,
+                                                        wireframe: true,
+                                                        wireframeLinewidth: 0.1}
+                                                        );
+    const cubeDepth = new THREE.Mesh( geometryDepth, materialDepth );
+    scene.add( cubeDepth );
+    cubeDepth.position.y = 0.5;
+    cubeDepth.position.z = 2;
+
+    // Objects Material Texture
+    const geometryTexture = new THREE.BoxGeometry( 1, 1, 1 );
+    const materialTexture = new THREE.MeshStandardMaterial({color: 0xffffff,
+                                                            map: new THREE.TextureLoader().load('../img/uv_test_bw_1024.png'),
+                                                            side: THREE.DoubleSide }
+                                                        );
+    const cubeTexture = new THREE.Mesh( geometryTexture, materialTexture );
+    scene.add( cubeTexture );
+    cubeTexture.position.y = 0.5;
+    cubeTexture.position.z = 2;
+    cubeTexture.position.x = -2;
+
     // Plane
     const planeGeomery = new THREE.PlaneGeometry( 10, 10 );
     const materialplane = new THREE.MeshStandardMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
