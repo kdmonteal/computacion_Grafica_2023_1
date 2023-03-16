@@ -52,7 +52,10 @@ function makeScene() {
 
     // Objects Material Normal
     const geometryNormal = new THREE.BoxGeometry( 1, 1, 1 );
-    const materialNormal = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    const materialNormal = new THREE.MeshNormalMaterial( {color: 0x00ff00,
+                                                            transparent: true,
+                                                            opacity: 0.5,
+                                                            wireframe: false} );
     const cubeNormal = new THREE.Mesh( geometryNormal, materialNormal );
     scene.add( cubeNormal );
     cubeNormal.position.y = 0.5;
