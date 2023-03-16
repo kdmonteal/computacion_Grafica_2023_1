@@ -40,12 +40,49 @@ function makeScene() {
     camera.position.z = 0;
     controls.update();
 
-    // Objects
+    // Objects Material Standard
     const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    const material = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    const material = new THREE.MeshStandardMaterial( {color: 0x00ff00,
+                                                        roughness: 0.3,
+                                                        metalness: 0.5
+                                                        } );
     const cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
     cube.position.y = 0.5;
+
+    // Objects Material Normal
+    const geometryNormal = new THREE.BoxGeometry( 1, 1, 1 );
+    const materialNormal = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    const cubeNormal = new THREE.Mesh( geometryNormal, materialNormal );
+    scene.add( cubeNormal );
+    cubeNormal.position.y = 0.5;
+    cubeNormal.position.x = -2;
+
+    // Objects Material Phong
+    const geometryPhong = new THREE.BoxGeometry( 1, 1, 1 );
+    const materialPhong = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    const cubePhong = new THREE.Mesh( geometryPhong, materialPhong );
+    scene.add( cubePhong );
+    cubePhong.position.y = 0.5;
+    cubePhong.position.x = 2;
+
+    // Objects Material Basic
+    const geometryBasic = new THREE.BoxGeometry( 1, 1, 1 );
+    const materialBasic = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    const cubeBasic = new THREE.Mesh( geometryBasic, materialBasic );
+    scene.add( cubeBasic );
+    cubeBasic.position.y = 0.5;
+    cubeBasic.position.x = 2;
+    cubeBasic.position.z = 2;
+
+    // Objects Material Lambert
+    const geometryLambert = new THREE.BoxGeometry( 1, 1, 1 );
+    const materialLambert = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    const cubeLambert = new THREE.Mesh( geometryLambert, materialLambert );
+    scene.add( cubeLambert );
+    cubeLambert.position.y = 0.5;
+    cubeLambert.position.x = 2;
+    cubeLambert.position.z = 2;
 
     // Plane
     const planeGeomery = new THREE.PlaneGeometry( 10, 10 );
