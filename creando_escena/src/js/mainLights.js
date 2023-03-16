@@ -63,7 +63,9 @@ function makeScene() {
 
     // Objects Material Phong
     const geometryPhong = new THREE.BoxGeometry( 1, 1, 1 );
-    const materialPhong = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    const materialPhong = new THREE.MeshPhongMaterial( {color: 0x00ff00,
+                                                        specular: 0xff0000,
+                                                        shininess: 1} );
     const cubePhong = new THREE.Mesh( geometryPhong, materialPhong );
     scene.add( cubePhong );
     cubePhong.position.y = 0.5;
@@ -71,7 +73,7 @@ function makeScene() {
 
     // Objects Material Basic
     const geometryBasic = new THREE.BoxGeometry( 1, 1, 1 );
-    const materialBasic = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    const materialBasic = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
     const cubeBasic = new THREE.Mesh( geometryBasic, materialBasic );
     scene.add( cubeBasic );
     cubeBasic.position.y = 0.5;
