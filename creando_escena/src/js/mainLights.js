@@ -150,7 +150,7 @@ function createLight(typeLight) {
     case 'SpotLight':
         // white spotlight shining from the side, modulated by a texture, casting a shadow
         const spotLight = new THREE.SpotLight( 0xffffff );
-        spotLight.position.set( 100, 1000, 100 );
+        spotLight.position.set( 0, 10, 0 );
         spotLight.map = new THREE.TextureLoader().load('../img/face2.png');
 
         spotLight.castShadow = true;
