@@ -83,16 +83,16 @@ function createcards(){
     const material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
     const plane = new THREE.Mesh( geometry, material );
     scene.add( plane );
-    plane.position.x=6;
-    plane.position.y=3;
+    plane.position.x=8;
+    //plane.position.y=3;
     plane.rotation.x = Math.PI / 2;
     
     const geometry2 = new THREE.PlaneGeometry( 3, 6 );
     const material2 = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
     const plane2 = new THREE.Mesh( geometry2, material2 );
     scene.add( plane2 );
-    plane2.position.x=-6;
-    plane2.position.y=3;
+    plane2.position.x=-8;
+    //plane2.position.y=3;
     plane2.rotation.x = Math.PI / 2;
 
 }
