@@ -105,10 +105,18 @@ function makeScene() {
 
     // Objects Material Texture
     const geometryTexture = new THREE.BoxGeometry( 1, 1, 1 );
-    const materialTexture = new THREE.MeshStandardMaterial({color: 0xffffff,
-                                                            map: new THREE.TextureLoader().load('../img/uv_test_bw_1024.png'),
-                                                            side: THREE.DoubleSide }
-                                                        );
+  //  const materialTexture = new THREE.MeshStandardMaterial({color: 0xffffff,
+    //                                                        map: new THREE.TextureLoader().load('../img/uv_test_bw_1024.png'),
+      //                                                      side: THREE.DoubleSide }
+        //                                                );
+        const materialTexture=[];
+            materialTexture.push( new THREE.MeshStandardMaterial({color: 0xffffff, map: new THREE.TextureLoader().load('../img/face1.png')}));
+            materialTexture.push( new THREE.MeshStandardMaterial({color: 0xffffff, map: new THREE.TextureLoader().load('../img/face2.png')}));
+            materialTexture.push( new THREE.MeshStandardMaterial({color: 0xffffff, map: new THREE.TextureLoader().load('../img/face3.png')}));
+            materialTexture.push( new THREE.MeshStandardMaterial({color: 0xffffff, map: new THREE.TextureLoader().load('../img/face4.png')}));
+            materialTexture.push( new THREE.MeshStandardMaterial({color: 0xffffff, map: new THREE.TextureLoader().load('../img/face5.png')}));
+            materialTexture.push( new THREE.MeshStandardMaterial({color: 0xffffff, map: new THREE.TextureLoader().load('../img/face6.png')}));
+            
     const cubeTexture = new THREE.Mesh( geometryTexture, materialTexture );
     scene.add( cubeTexture );
     cubeTexture.position.y = 0.5;
