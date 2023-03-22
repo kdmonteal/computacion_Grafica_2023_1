@@ -80,7 +80,10 @@ function createtablechess() {
 function createcards(){
 
     const geometry = new THREE.PlaneGeometry( 3, 6 );
-    const material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    const material = new THREE.MeshBasicMaterial( {color: 0xffff00, 
+                                                    side: THREE.DoubleSide,
+                                                    map: new THREE.TextureLoader().load('../img/caballo.png')
+                                                } );
     const plane = new THREE.Mesh( geometry, material );
     scene.add( plane );
     plane.position.x=8;
