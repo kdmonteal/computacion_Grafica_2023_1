@@ -18,6 +18,7 @@ function initScene() {
     // createcards();
     loadModel_ObjMtl();
     window.addEventListener('resize', onWindowResize, false); // resize 
+    //createLight('AmbientLight');
 
 }
 function makeScene() {
@@ -104,8 +105,6 @@ function createcards() {
 }
 
 function loadModel_ObjMtl() {
-
-
     var mtlLoader = new THREE.MTLLoader();
         mtlLoader.setResourcePath("../models/OBJMTL/fichas_ajedrez/");
         mtlLoader.setPath("../models/OBJMTL/fichas_ajedrez/");
@@ -113,12 +112,26 @@ function loadModel_ObjMtl() {
 
         materials.preload();
     });
-
-
     var objLoader = new THREE.OBJLoader();
     // objLoader.setMaterials(materials);
     objLoader.setPath("../models/OBJMTL/fichas_ajedrez/");
     objLoader.load("peonB_ficha.obj", function (object) {
+
+        scene.add(object);
+        //object.scale.set(3, 3, 3);
+    });
+
+    var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setResourcePath("../models/OBJMTL/fichas_ajedrez/");
+        mtlLoader.setPath("../models/OBJMTL/fichas_ajedrez/");
+        mtlLoader.load("peon_ficha.mtl", function (materials) {
+
+        materials.preload();
+    });
+    var objLoader = new THREE.OBJLoader();
+    // objLoader.setMaterials(materials);
+    objLoader.setPath("../models/OBJMTL/fichas_ajedrez/");
+    objLoader.load("peon_ficha.obj", function (object) {
 
         scene.add(object);
         //object.scale.set(3, 3, 3);
@@ -128,9 +141,9 @@ function loadModel_ObjMtl() {
 function createLight(typeLight) {
 
     switch (typeLight) {
-        case 'AmbientLight':
+        case 'AmbientLight':   
             // Ambient Light
-            const light = new THREE.AmbientLight(0x404040); // soft white light
+            const light = new THREE.AmbientLight(0xffffff); // soft white light
             scene.add(light);
             break;
         case 'directionalLight':
