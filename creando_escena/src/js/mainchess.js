@@ -15,7 +15,7 @@ function initScene() {
     // createGrid(10, 10);
     renderScreen();
     createtablechess();
-    createcards();
+    // createcards();
     loadModel_ObjMtl();
     window.addEventListener('resize', onWindowResize, false); // resize 
 
@@ -72,10 +72,11 @@ function createtablechess() {
     });
 
     // Plane
-    const planeGeomery = new THREE.PlaneGeometry(10, 10);
+    const planeGeomery = new THREE.PlaneGeometry(50, 50);
     const plane = new THREE.Mesh(planeGeomery, material);
     scene.add(plane);
     plane.rotation.x = Math.PI / 2;
+    plane.position.y = 2;
 
 }
 function createcards() {
@@ -103,26 +104,25 @@ function createcards() {
 }
 
 function loadModel_ObjMtl() {
-    // instantiate a loader
-    const loader = new THREE.OBJLoader();
 
-    // load a resource
-    loader.load(
-        // resource URL
-        './',
-        // called when resource is loaded
-        function (object) {
-            scene.add(object);
-        },
-        // called when loading is in progresses
-        function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-        },
-        // called when loading has errors
-        function (error) {
-            console.log('An error happened');
-        }
-    );
+
+    var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setResourcePath("../models/OBJMTL/fichas_ajedrez/");
+        mtlLoader.setPath("../models/OBJMTL/fichas_ajedrez/");
+        mtlLoader.load("peonB_ficha.mtl", function (materials) {
+
+        materials.preload();
+    });
+
+
+    var objLoader = new THREE.OBJLoader();
+    // objLoader.setMaterials(materials);
+    objLoader.setPath("../models/OBJMTL/fichas_ajedrez/");
+    objLoader.load("peonB_ficha.obj", function (object) {
+
+        scene.add(object);
+        //object.scale.set(3, 3, 3);
+    });
 }
 
 function createLight(typeLight) {
