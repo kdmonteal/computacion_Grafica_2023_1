@@ -12,10 +12,11 @@ var scene = null,   // Is the place where webgl draw all elements in the screen
 
 function initScene() {
     makeScene();
-   // createGrid(10, 10);
+    // createGrid(10, 10);
     renderScreen();
     createtablechess();
     createcards();
+    loadModel_ObjMtl();
     window.addEventListener('resize', onWindowResize, false); // resize 
 
 }
@@ -44,7 +45,7 @@ function makeScene() {
     controls.update();
 
 }
-   
+
 
 //tablero
 
@@ -75,33 +76,54 @@ function createtablechess() {
     const plane = new THREE.Mesh(planeGeomery, material);
     scene.add(plane);
     plane.rotation.x = Math.PI / 2;
-    
-}
-function createcards(){
 
-    const geometry = new THREE.PlaneGeometry( 3, 6 );
-    const material = new THREE.MeshBasicMaterial( {color: 0xffff00, 
-                                                    side: THREE.DoubleSide,
-                                                    map: new THREE.TextureLoader().load('../img/caballo.png')
-                                                } );
-    const plane = new THREE.Mesh( geometry, material );
-    scene.add( plane );
-    plane.position.x=8;
+}
+function createcards() {
+
+    const geometry = new THREE.PlaneGeometry(3, 6);
+    const material = new THREE.MeshBasicMaterial({
+        color: 0xffff00,
+        side: THREE.DoubleSide,
+        map: new THREE.TextureLoader().load('../img/caballo.png')
+    });
+    const plane = new THREE.Mesh(geometry, material);
+    scene.add(plane);
+    plane.position.x = 8;
     //plane.position.y=3;
     plane.rotation.x = Math.PI / 2;
-    
-    const geometry2 = new THREE.PlaneGeometry( 3, 6 );
-    const material2 = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-    const plane2 = new THREE.Mesh( geometry2, material2 );
-    scene.add( plane2 );
-    plane2.position.x=-8;
+
+    const geometry2 = new THREE.PlaneGeometry(3, 6);
+    const material2 = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
+    const plane2 = new THREE.Mesh(geometry2, material2);
+    scene.add(plane2);
+    plane2.position.x = -8;
     //plane2.position.y=3;
     plane2.rotation.x = Math.PI / 2;
 
 }
 
+function loadModel_ObjMtl() {
+    // instantiate a loader
+    const loader = new THREE.OBJLoader();
 
-
+    // load a resource
+    loader.load(
+        // resource URL
+        './',
+        // called when resource is loaded
+        function (object) {
+            scene.add(object);
+        },
+        // called when loading is in progresses
+        function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        },
+        // called when loading has errors
+        function (error) {
+            console.log('An error happened');
+        }
+    );
+}
 
 function createLight(typeLight) {
 
