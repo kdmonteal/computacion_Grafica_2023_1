@@ -16,11 +16,33 @@ function initScene() {
     renderScreen();
     createtablechess();
     // createcards();
-    loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","peonB_ficha.mtl","peonB_ficha.obj");
-    loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","caballo_ficha.mtl","caballo_ficha.obj");
+
+    // PEONES (X8)
+    for (let index = 0; index < 8; index++) {
+        loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","peon_ficha.mtl","peon_ficha.obj",index*6.3);
+    }
+    // ALFIL (X2)
+    for (let index =0; index < 2; index++){
+        loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","alfil_ficha.mtl","alfil_ficha.obj",(index*19)-2);
+    }
+    // CABALLOS (X2)
+    for (let index = 0; index < 2; index++) {
+        loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","caballo_ficha.mtl","caballo_ficha.obj",(index*30)+7);
+    }
+    // TORRES (X2)
+    for (let index =0; index < 2; index++){
+        loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","torre_ficha.mtl","torre_ficha.obj",(index*43)+6);
+    }
+    //REINA (x1)
+    loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","reina_ficha.mtl","reina_ficha.obj",4);
+   
+    //REY (X1)
+    loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","rey_ficha.mtl","rey_ficha.obj",15);
+
+
 
     window.addEventListener('resize', onWindowResize, false); // resize 
-    //createLight('AmbientLight');
+    createLight('pointLight');
 
 }
 function makeScene() {
@@ -42,9 +64,10 @@ function makeScene() {
 
     // To Make Controls on Screen
     controls = new THREE.OrbitControls(camera, renderer.domElement);
-    camera.position.x = 0;
-    camera.position.y = 10;
-    camera.position.z = 0;
+    camera.position.x = -25;
+    camera.position.y = 25;
+    camera.position.z = 49;
+
     controls.update();
 
 }
@@ -80,7 +103,8 @@ function createtablechess() {
     scene.add(plane);
     plane.rotation.x = Math.PI / 2;
     plane.position.y = 2;
-
+    plane.position.x = 7.5;
+    plane.position.z = 19;
 }
 function createcards() {
 
@@ -106,7 +130,7 @@ function createcards() {
 
 }
 
-function loadModel_ObjMtl(folderObjMtl, filemtl, fileobj) {
+function loadModel_ObjMtl(folderObjMtl, filemtl, fileobj, i) {
     var mtlLoader = new THREE.MTLLoader();
         mtlLoader.setResourcePath(folderObjMtl);  //"../models/OBJMTL/fichas_ajedrez/"
         mtlLoader.setPath(folderObjMtl); // "../models/OBJMTL/fichas_ajedrez/"
@@ -121,6 +145,7 @@ function loadModel_ObjMtl(folderObjMtl, filemtl, fileobj) {
 
         scene.add(object);
         //object.scale.set(3, 3, 3);
+        object.position.set(i,0,0);
     });
 }
 
@@ -129,7 +154,7 @@ function createLight(typeLight) {
     switch (typeLight) {
         case 'AmbientLight':   
             // Ambient Light
-            const light = new THREE.AmbientLight(0xffffff); // soft white light
+            const light = new THREE.AmbientLight(0xffffff, 0.2); // soft white light
             scene.add(light);
             break;
         case 'directionalLight':
@@ -141,8 +166,8 @@ function createLight(typeLight) {
             scene.add(helper);
             break;
         case 'pointLight':
-            const pointLight = new THREE.PointLight(0xfffff0, 1, 100);
-            pointLight.position.set(1, 1, 1);
+            const pointLight = new THREE.PointLight(0xfffff0, 1, 500);
+            pointLight.position.set(1, 10, 20);
             scene.add(pointLight);
 
             const sphereSize = 1;
@@ -187,6 +212,5 @@ function onWindowResize() {
 function renderScreen() {
     requestAnimationFrame(renderScreen);
     controls.update();
-
     renderer.render(scene, camera);
 }
