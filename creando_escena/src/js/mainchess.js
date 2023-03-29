@@ -16,7 +16,9 @@ function initScene() {
     renderScreen();
     createtablechess();
     // createcards();
-    loadModel_ObjMtl();
+    loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","peonB_ficha.mtl","peonB_ficha.obj");
+    loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","caballo_ficha.mtl","caballo_ficha.obj");
+
     window.addEventListener('resize', onWindowResize, false); // resize 
     //createLight('AmbientLight');
 
@@ -104,34 +106,18 @@ function createcards() {
 
 }
 
-function loadModel_ObjMtl() {
+function loadModel_ObjMtl(folderObjMtl, filemtl, fileobj) {
     var mtlLoader = new THREE.MTLLoader();
-        mtlLoader.setResourcePath("../models/OBJMTL/fichas_ajedrez/");
-        mtlLoader.setPath("../models/OBJMTL/fichas_ajedrez/");
-        mtlLoader.load("peonB_ficha.mtl", function (materials) {
+        mtlLoader.setResourcePath(folderObjMtl);  //"../models/OBJMTL/fichas_ajedrez/"
+        mtlLoader.setPath(folderObjMtl); // "../models/OBJMTL/fichas_ajedrez/"
+        mtlLoader.load(filemtl, function (materials) { //"peonB_ficha.mtl"
 
         materials.preload();
     });
     var objLoader = new THREE.OBJLoader();
     // objLoader.setMaterials(materials);
-    objLoader.setPath("../models/OBJMTL/fichas_ajedrez/");
-    objLoader.load("peonB_ficha.obj", function (object) {
-
-        scene.add(object);
-        //object.scale.set(3, 3, 3);
-    });
-
-    var mtlLoader = new THREE.MTLLoader();
-        mtlLoader.setResourcePath("../models/OBJMTL/fichas_ajedrez/");
-        mtlLoader.setPath("../models/OBJMTL/fichas_ajedrez/");
-        mtlLoader.load("peon_ficha.mtl", function (materials) {
-
-        materials.preload();
-    });
-    var objLoader = new THREE.OBJLoader();
-    // objLoader.setMaterials(materials);
-    objLoader.setPath("../models/OBJMTL/fichas_ajedrez/");
-    objLoader.load("peon_ficha.obj", function (object) {
+    objLoader.setPath(folderObjMtl); //"../models/OBJMTL/fichas_ajedrez/"
+    objLoader.load(fileobj, function (object) { //"peonB_ficha.obj"
 
         scene.add(object);
         //object.scale.set(3, 3, 3);
