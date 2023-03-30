@@ -4,11 +4,17 @@
     Last modification: 22 de Marzo 2023 14:20
 */
 
-var scene = null,   // Is the place where webgl draw all elements in the screen 
-    camera = null,   // Is the element to allow see
+var scene = null,      // Is the place where webgl draw all elements in the screen 
+    camera = null,     // Is the element to allow see
     myCanvas = null,   // Is the Canvas ("lienzo")
     renderer = null,   // Is the process to represent the content
-    controls = null;   // Is the controller that user have to move the mouse in the screen (Zoom in, z. Out, movement, drag)
+    controls = null,   // Is the controller that user have to move the mouse in the screen (Zoom in, z. Out, movement, drag)
+    namesModelObjMtl = ["peon_ficha",    //0
+                        "alfil_ficha",   //1
+                        "caballo_ficha", //2
+                        "torre_ficha",   //3
+                        "reina_ficha",   //4
+                        "rey_ficha"];    //5
 
 function initScene() {
     makeScene();
@@ -16,34 +22,45 @@ function initScene() {
     renderScreen();
     createtablechess();
     // createcards();
+    createFichas('negras');
+    createFichas('blancas');
+    window.addEventListener('resize', onWindowResize, false); // resize 
+    createLight('pointLight');
+}
 
+function createFichas(expression) {
+    switch (expression) {
+        case 'negras':
+            createModel("../models/OBJMTL/fichas_ajedrez/",1);
+          break;
+        case 'blancas':
+            createModel("../models/OBJMTL/fichas_ajedrez/",-1);
+          break;
+    }
+}
+
+function createModel(namefolder,factor) {
     // PEONES (X8)
     for (let index = 0; index < 8; index++) {
-        loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","peon_ficha.mtl","peon_ficha.obj",index*6.3);
+        loadModel_ObjMtl(namefolder,namesModelObjMtl[0]+".mtl",namesModelObjMtl[0]+".obj",(index*6.3),1*factor);
     }
     // ALFIL (X2)
     for (let index =0; index < 2; index++){
-        loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","alfil_ficha.mtl","alfil_ficha.obj",(index*19)-2);
+        loadModel_ObjMtl(namefolder,namesModelObjMtl[1]+".mtl",namesModelObjMtl[1]+".obj",((index*19)-2),1*factor);
     }
     // CABALLOS (X2)
     for (let index = 0; index < 2; index++) {
-        loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","caballo_ficha.mtl","caballo_ficha.obj",(index*30)+7);
+        loadModel_ObjMtl(namefolder,namesModelObjMtl[2]+".mtl",namesModelObjMtl[2]+".obj",((index*30)+7),1*factor);
     }
     // TORRES (X2)
     for (let index =0; index < 2; index++){
-        loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","torre_ficha.mtl","torre_ficha.obj",(index*43)+6);
+        loadModel_ObjMtl(namefolder,namesModelObjMtl[3]+".mtl",namesModelObjMtl[3]+".obj",((index*43)+6),1*factor);
     }
     //REINA (x1)
-    loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","reina_ficha.mtl","reina_ficha.obj",4);
-   
+    loadModel_ObjMtl(namefolder,namesModelObjMtl[4]+".mtl",namesModelObjMtl[4]+".obj",4,1*factor);
+
     //REY (X1)
-    loadModel_ObjMtl("../models/OBJMTL/fichas_ajedrez/","rey_ficha.mtl","rey_ficha.obj",15);
-
-
-
-    window.addEventListener('resize', onWindowResize, false); // resize 
-    createLight('pointLight');
-
+    loadModel_ObjMtl(namefolder,namesModelObjMtl[5]+".mtl",namesModelObjMtl[5]+".obj",15,1*factor);
 }
 function makeScene() {
     // 1ER. Create a Scene
@@ -130,7 +147,7 @@ function createcards() {
 
 }
 
-function loadModel_ObjMtl(folderObjMtl, filemtl, fileobj, i) {
+function loadModel_ObjMtl(folderObjMtl, filemtl, fileobj, i, j) {
     var mtlLoader = new THREE.MTLLoader();
         mtlLoader.setResourcePath(folderObjMtl);  //"../models/OBJMTL/fichas_ajedrez/"
         mtlLoader.setPath(folderObjMtl); // "../models/OBJMTL/fichas_ajedrez/"
@@ -145,7 +162,13 @@ function loadModel_ObjMtl(folderObjMtl, filemtl, fileobj, i) {
 
         scene.add(object);
         //object.scale.set(3, 3, 3);
-        object.position.set(i,0,0);
+
+        if(j==-1){
+            object.position.set(i,0,j+33);
+            //object.rotation.y = Math.PI*-0.2;
+        }else{
+            object.position.set(i,0,j);
+        }
     });
 }
 
