@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Vectors 3D</title>
+    <link rel="icon" type="image/png" href="../img/favicon_web.PNG">
+    <link rel="stylesheet" href="../css/mainStyle.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="../libreries/three.js"></script>
+    <script src="../vendors/load/OBJLoader.js"></script>
+    <script src="../vendors/load/MTLLoader.js"></script>
+    <script src="../libreries/OrbitControls.js"></script>
+
+    <script src="../js/myGame.js"></script>
+</head>
+<body onload="initScene()">
+    <audio id="myAudio"> <!--controls-->
+        <source src="../sounds/backgroundSound.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <canvas width="800" height="600" class="webgl"></canvas>
+</body>
+</html>
