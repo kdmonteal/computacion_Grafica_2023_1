@@ -8,8 +8,9 @@ var scene = null,      // Is the place where webgl draw all elements in the scre
     camera = null,     // Is the element to allow see
     myCanvas = null,   // Is the Canvas ("lienzo")
     renderer = null,   // Is the process to represent the content
-    controls = null;   // Is the controller that user have to move the mouse in the screen (Zoom in, z. Out, movement, drag)
-   
+    controls = null,   // Is the controller that user have to move the mouse in the screen (Zoom in, z. Out, movement, drag)
+    pointLight = null,
+    pointLightHelper = null;   
 
 function initScene() {
     makeScene();
@@ -18,6 +19,8 @@ function initScene() {
     window.addEventListener('resize', onWindowResize, false); // resize 
     createLight('pointLight');
     document.getElementById("myAudio").play();
+
+    collectible(5);
 }
 
 
@@ -39,12 +42,15 @@ function makeScene() {
     document.body.appendChild(renderer.domElement);
 
     // To Make Controls on Screen
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    // controls = new THREE.OrbitControls(camera, renderer.domElement);
     camera.position.x = -25;
     camera.position.y = 25;
-    camera.position.z = 49;
+    camera.position.z = 90;
 
-    controls.update();
+    // controls.update();
+
+    const helper = new THREE.CameraHelper( camera );
+    scene.add( helper );
 
     // populate the scene
     var loader = new THREE.TextureLoader();
@@ -82,12 +88,12 @@ function createLight(typeLight) {
             scene.add(helper);
             break;
         case 'pointLight':
-            const pointLight = new THREE.PointLight(0xfffff0, 1, 500);
-            pointLight.position.set(1, 10, 20);
+            pointLight = new THREE.PointLight(0xfffff0, 1, 500);
+            pointLight.position.set(-25, 25, 49);
             scene.add(pointLight);
 
             const sphereSize = 1;
-            const pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
+            pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
             scene.add(pointLightHelper);
             break;
         case 'SpotLight':
@@ -127,6 +133,58 @@ function onWindowResize() {
 }
 function renderScreen() {
     requestAnimationFrame(renderScreen);
-    controls.update();
+    // controls.update();
     renderer.render(scene, camera);
+    movementPlayer();
+}
+
+function collectible(quanty) {
+
+    for (let index = 0; index < quanty; index++) {
+        var loader = new THREE.TextureLoader();
+        var texture = loader.load("../img/cajaTexture.PNG", function (texture) {
+            texture.anisotropy = 32;
+        });
+
+        let geo = new THREE.BoxBufferGeometry(30, 30, 30);
+        let mat = new THREE.MeshLambertMaterial({
+            color: "white",
+            map: texture
+        })
+        let mesh = new THREE.Mesh(geo, mat);
+        scene.add(mesh);
+        mesh.position.y = 15;
+        mesh.position.x = Math.floor((Math.random() * 500) + 1);
+        mesh.position.z = Math.floor((Math.random() * 500) + 1);
+
+    }
+    
+}
+function movementPlayer() {
+    window.addEventListener("keydown", function (myKey) {
+        console.log(myKey.key);
+
+        switch (myKey.key) {
+            case 'w':
+                camera.position.z -=0.01;
+                pointLight.position.z -=0.01;
+                pointLightHelper.position.z -=0.01;
+            break;
+            case 's':
+                camera.position.z +=0.01;
+                pointLight.position.z +=0.01;
+                pointLightHelper.position.z +=0.01;
+            break;
+            case 'a':
+                camera.position.x -=0.01;
+                pointLight.position.x -=0.01;
+                pointLightHelper.position.x -=0.01;
+            break;
+            case 'd':
+                camera.position.x +=0.01;
+                pointLight.position.x +=0.01;
+                pointLightHelper.position.x +=0.01;
+            break;
+        }
+    });
 }
