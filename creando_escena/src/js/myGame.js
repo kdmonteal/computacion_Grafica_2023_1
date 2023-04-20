@@ -10,20 +10,21 @@ var scene = null,      // Is the place where webgl draw all elements in the scre
     renderer = null,   // Is the process to represent the content
     controls = null,   // Is the controller that user have to move the mouse in the screen (Zoom in, z. Out, movement, drag)
     pointLight = null,
-    pointLightHelper = null;   
+    pointLightHelper = null,
+    my3dSound = null;
 
+function startGame() {
+    document.getElementById("blocker").style.display = "none";
+}
 function initScene() {
     makeScene();
-    //createGrid(10, 10);
+    init3DSound();
     renderScreen();
     window.addEventListener('resize', onWindowResize, false); // resize 
     createLight('pointLight');
     document.getElementById("myAudio").play();
-
     collectible(5);
 }
-
-
 function makeScene() {
     // 1ER. Create a Scene
     scene = new THREE.Scene();
@@ -35,6 +36,9 @@ function makeScene() {
         1000); // Far (Lejano)
 
     scene.add(camera);
+    // const stats = new THREE.Stats();
+    // document.body.appendChild( stats.domElement );
+
     // 3RO. To Render (Representar/visualizar algo)
     myCanvas = document.querySelector('.webgl');
     renderer = new THREE.WebGLRenderer({ canvas: myCanvas });
@@ -48,9 +52,8 @@ function makeScene() {
     camera.position.z = 90;
 
     // controls.update();
-
-    const helper = new THREE.CameraHelper( camera );
-    scene.add( helper );
+    // const helper = new THREE.CameraHelper(camera);
+    // scene.add(helper);
 
     // populate the scene
     var loader = new THREE.TextureLoader();
@@ -62,23 +65,26 @@ function makeScene() {
         texture.wrapS = THREE.RepeatWrapping;
 
     });
-    
+
     geo = new THREE.PlaneBufferGeometry(10000, 10000);
     mat = new THREE.MeshStandardMaterial({ map: texture });
     mesh = new THREE.Mesh(geo, mat);
     mesh.position.set(0, -5, 0);
     mesh.rotation.set(Math.PI / -2, 0, 0);
     scene.add(mesh);
-}
 
-function startGame() {
-    document.getElementById("blocker").style.display = "none";
+    
 }
-
+function init3DSound() {
+    my3dSound = new Sound(["../sounds/rain.mp3"], 300, scene, {   // radio(10)
+        debug: false,
+        position: { x: camera.position.x, y: camera.position.y, z: camera.position.z }
+      });
+}
 function createLight(typeLight) {
 
     switch (typeLight) {
-        case 'AmbientLight':   
+        case 'AmbientLight':
             // Ambient Light
             const light = new THREE.AmbientLight(0xffffff, 0.2); // soft white light
             scene.add(light);
@@ -97,8 +103,8 @@ function createLight(typeLight) {
             scene.add(pointLight);
 
             const sphereSize = 1;
-            pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
-            scene.add(pointLightHelper);
+            // pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
+            // scene.add(pointLightHelper);
             break;
         case 'SpotLight':
             // white spotlight shining from the side, modulated by a texture, casting a shadow
@@ -128,20 +134,6 @@ function createGrid(data1_size, data2_division) {
     const gridHelper = new THREE.GridHelper(size, divisions);
     scene.add(gridHelper);
 }
-function onWindowResize() {
-
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-}
-function renderScreen() {
-    requestAnimationFrame(renderScreen);
-    // controls.update();
-    renderer.render(scene, camera);
-    movementPlayer();
-}
-
 function collectible(quanty) {
 
     for (let index = 0; index < quanty; index++) {
@@ -162,7 +154,7 @@ function collectible(quanty) {
         mesh.position.z = Math.floor((Math.random() * 500) + 1);
 
     }
-    
+
 }
 function movementPlayer() {
     window.addEventListener("keydown", function (myKey) {
@@ -170,28 +162,42 @@ function movementPlayer() {
 
         switch (myKey.key) {
             case 'w':
-                camera.position.z -=0.01;
-                pointLight.position.z -=0.01;
-                pointLightHelper.position.z -=0.01;
-            break;
+                camera.position.z -= 0.01;
+                pointLight.position.z -= 0.01;
+                pointLightHelper.position.z -= 0.01;
+                break;
             case 's':
-                camera.position.z +=0.01;
-                pointLight.position.z +=0.01;
-                pointLightHelper.position.z +=0.01;
-            break;
+                camera.position.z += 0.01;
+                pointLight.position.z += 0.01;
+                pointLightHelper.position.z += 0.01;
+                break;
             case 'a':
-                camera.position.x -=0.01;
-                pointLight.position.x -=0.01;
-                pointLightHelper.position.x -=0.01;
-            break;
+                camera.position.x -= 0.01;
+                pointLight.position.x -= 0.01;
+                pointLightHelper.position.x -= 0.01;
+                break;
             case 'd':
-                camera.position.x +=0.01;
-                pointLight.position.x +=0.01;
-                pointLightHelper.position.x +=0.01;
-            break;
+                camera.position.x += 0.01;
+                pointLight.position.x += 0.01;
+                pointLightHelper.position.x += 0.01;
+                break;
             case 'Escape':
                 document.getElementById("blocker").style.display = "block";
-            break;
+                break;
         }
     });
+}
+function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+function renderScreen() {
+    requestAnimationFrame(renderScreen);
+    renderer.render(scene, camera);
+    my3dSound.update(camera);
+    movementPlayer();
+    my3dSound.play();
 }
