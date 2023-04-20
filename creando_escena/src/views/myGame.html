@@ -17,15 +17,20 @@
     <script src="../vendors/load/OBJLoader.js"></script>
     <script src="../vendors/load/MTLLoader.js"></script>
     <script src="../libreries/OrbitControls.js"></script>
-    <script src="../js/myGame.js"></script>
 </head>
 <body onload="initScene()">
+
+    <div style="position: absolute;color: white; font-size: 59px; text-align: center; left: 43%;">
+        <label id="minutes">00</label> 
+        <label>:</label>
+        <label id="seconds">00</label>    
+    </div>
+    
     <audio id="myAudio"> <!--controls-->
         <source src="../sounds/backgroundSound.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
     <canvas width="800" height="600" class="webgl"></canvas>
-
     <div id="blocker">
         <div id="instructions">
             (MOUSE = Look around)
@@ -33,5 +38,6 @@
             <span onclick="startGame()" style="font-size:40px">Click to Play</span>
         </div>
     </div>
+    <script src="../js/myGame.js"></script>
 </body>
 </html>

@@ -13,15 +13,20 @@ var scene = null,      // Is the place where webgl draw all elements in the scre
     pointLightHelper = null,
     my3dSound = null;  // The Variable to 3D sound
 
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var totalSeconds = 0;
+
 function startGame() {
     document.getElementById("blocker").style.display = "none";
+    document.getElementById("myAudio").play();
+    setInterval(setTime, 1000);
 }
 function initScene() {
     makeScene();
     renderScreen();
     window.addEventListener('resize', onWindowResize, false); // resize 
     createLight('pointLight');
-    document.getElementById("myAudio").play();
     collectible(5);
 }
 function makeScene() {
@@ -194,4 +199,18 @@ function renderScreen() {
     my3dSound.update(camera);
     my3dSound.play();
     movementPlayer();
+}
+function setTime() {
+    ++totalSeconds;
+    secondsLabel.innerHTML = pad(totalSeconds % 60);
+    minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
+function pad(val) {
+    var valString = val + "";
+    if (valString.length < 2) {
+        return "0" + valString;
+    } else {
+        return valString;
+    }
 }
