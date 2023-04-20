@@ -71,6 +71,10 @@ function makeScene() {
     scene.add(mesh);
 }
 
+function startGame() {
+    document.getElementById("blocker").style.display = "none";
+}
+
 function createLight(typeLight) {
 
     switch (typeLight) {
@@ -184,6 +188,9 @@ function movementPlayer() {
                 camera.position.x +=0.01;
                 pointLight.position.x +=0.01;
                 pointLightHelper.position.x +=0.01;
+            break;
+            case 'Escape':
+                document.getElementById("blocker").style.display = "block";
             break;
         }
     });
