@@ -11,14 +11,13 @@ var scene = null,      // Is the place where webgl draw all elements in the scre
     controls = null,   // Is the controller that user have to move the mouse in the screen (Zoom in, z. Out, movement, drag)
     pointLight = null,
     pointLightHelper = null,
-    my3dSound = null;
+    my3dSound = null;  // The Variable to 3D sound
 
 function startGame() {
     document.getElementById("blocker").style.display = "none";
 }
 function initScene() {
     makeScene();
-    init3DSound();
     renderScreen();
     window.addEventListener('resize', onWindowResize, false); // resize 
     createLight('pointLight');
@@ -73,13 +72,8 @@ function makeScene() {
     mesh.rotation.set(Math.PI / -2, 0, 0);
     scene.add(mesh);
 
-    
-}
-function init3DSound() {
-    my3dSound = new Sound(["../sounds/rain.mp3"], 300, scene, {   // radio(10)
-        debug: false,
-        position: { x: camera.position.x, y: camera.position.y, z: camera.position.z }
-      });
+    // 3d Sound Section
+    my3dSound = new Sound(["../sounds/rain.mp3"], 300, scene, {debug: false,position: { x: camera.position.x, y: camera.position.y, z: camera.position.z }});
 }
 function createLight(typeLight) {
 
@@ -198,6 +192,6 @@ function renderScreen() {
     requestAnimationFrame(renderScreen);
     renderer.render(scene, camera);
     my3dSound.update(camera);
-    movementPlayer();
     my3dSound.play();
+    movementPlayer();
 }
